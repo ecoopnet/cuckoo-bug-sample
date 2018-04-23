@@ -17,6 +17,8 @@
 		B5666150208DB89500442CB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B566614E208DB89500442CB0 /* LaunchScreen.storyboard */; };
 		B566615B208DB89500442CB0 /* CuckooSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566615A208DB89500442CB0 /* CuckooSampleTests.swift */; };
 		B5666166208DB89500442CB0 /* CuckooSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5666165208DB89500442CB0 /* CuckooSampleUITests.swift */; };
+		B5C756FC208DBA30008A8D7E /* Foo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C756FB208DBA30008A8D7E /* Foo.swift */; };
+		B5C756FE208DBAE4008A8D7E /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C756FD208DBAE3008A8D7E /* GeneratedMocks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		B5666161208DB89500442CB0 /* CuckooSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuckooSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5666165208DB89500442CB0 /* CuckooSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooSampleUITests.swift; sourceTree = "<group>"; };
 		B5666167208DB89500442CB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5C756FB208DBA30008A8D7E /* Foo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foo.swift; sourceTree = "<group>"; };
+		B5C756FD208DBAE3008A8D7E /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		C19CDFF0AB4057D218367CAB /* Pods-CuckooSampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CuckooSampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CuckooSampleTests/Pods-CuckooSampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB6169633A4705EA2308052 /* Pods_CuckooSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CuckooSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +143,7 @@
 			children = (
 				B5666145208DB89300442CB0 /* AppDelegate.swift */,
 				B5666147208DB89300442CB0 /* ViewController.swift */,
+				B5C756FB208DBA30008A8D7E /* Foo.swift */,
 				B5666149208DB89300442CB0 /* Main.storyboard */,
 				B566614C208DB89500442CB0 /* Assets.xcassets */,
 				B566614E208DB89500442CB0 /* LaunchScreen.storyboard */,
@@ -150,6 +155,7 @@
 		B5666159208DB89500442CB0 /* CuckooSampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5C756FD208DBAE3008A8D7E /* GeneratedMocks.swift */,
 				B566615A208DB89500442CB0 /* CuckooSampleTests.swift */,
 				B566615C208DB89500442CB0 /* Info.plist */,
 			);
@@ -191,6 +197,7 @@
 			buildConfigurationList = B566616D208DB89500442CB0 /* Build configuration list for PBXNativeTarget "CuckooSampleTests" */;
 			buildPhases = (
 				8D93CFD88058C9A35A276BC1 /* [CP] Check Pods Manifest.lock */,
+				B5C756F9208DB9E6008A8D7E /* ShellScript */,
 				B5666152208DB89500442CB0 /* Sources */,
 				B5666153208DB89500442CB0 /* Frameworks */,
 				B5666154208DB89500442CB0 /* Resources */,
@@ -350,6 +357,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B5C756F9208DB9E6008A8D7E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Define output file. Change \"$PROJECT_DIR/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"$PROJECT_DIR/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = $INPUT_DIR\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"$PROJECT_NAME\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"$INPUT_DIR/MonotaRO Basket/Presentation/Common/Navigation/Navigator.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.";
+		};
 		FFC4143E810626A30F0B3CC9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,6 +397,7 @@
 			files = (
 				B5666148208DB89300442CB0 /* ViewController.swift in Sources */,
 				B5666146208DB89300442CB0 /* AppDelegate.swift in Sources */,
+				B5C756FC208DBA30008A8D7E /* Foo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B566615B208DB89500442CB0 /* CuckooSampleTests.swift in Sources */,
+				B5C756FE208DBAE4008A8D7E /* GeneratedMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
